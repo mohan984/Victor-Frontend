@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 1. Create a new Axios instance
 const api = axios.create({
-  baseURL: "http://127.0.0.1:8000", 
+  baseURL: " https://tame-chairs-buy.loca.lt/", 
   headers: {
     'Content-Type': 'application/json',
 
