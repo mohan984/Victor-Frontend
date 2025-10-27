@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 1. Create a new Axios instance
 const api = axios.create({
-  baseURL: " https://tame-chairs-buy.loca.lt/", 
+  baseURL: " https://true-rice-fold.loca.lt", 
   headers: {
     'Content-Type': 'application/json',
 

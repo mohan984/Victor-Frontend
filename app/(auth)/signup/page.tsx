@@ -61,7 +61,7 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await fetch("https://tame-chairs-buy.loca.lt/accounts/signup/", {
+      const res = await fetch("https://true-rice-fold.loca.lt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
