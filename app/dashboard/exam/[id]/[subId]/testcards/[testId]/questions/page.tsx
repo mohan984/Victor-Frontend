@@ -62,33 +62,46 @@ export default function QuestionsPage() {
     }
 
     const handlestartTest = async () => {
-      try {
-        // CHANGED: Corrected API path
-        const response = await api.post('exams/api/submissions/start_test/', {
-          test_card_id: testId,
-        });
-        
-        const data = response.data;
-        setSubmissionId(data.submission_id);
-        setTestCard(data.test_card);
-        setTimeLeft(data.test_card.duration_minutes * 60);
-      } catch (err: any) {
-        let errorMessage = 'An unexpected error occurred.';
-        if (err.response) {
-            if (typeof err.response.data === 'string' && err.response.data.trim().startsWith('<!DOCTYPE')) {
-                errorMessage = 'The server returned an unexpected HTML response instead of JSON. This might be due to an authentication issue (please try logging in again) or a server error.';
-            } else {
-                errorMessage = err.response.data?.error || err.message || 'Failed to load test';
-            }
-        } else {
-            errorMessage = err.message || 'A network error occurred.';
-        }
-        setError(errorMessage);
-      } finally {
-        setLoading(false);
-      }
-    };
+try {
+        // CHANGED: Corrected API path
+        const response = await api.post('exams/api/submissions/start_test/', {
+          test_card_id: testId,
+        });
+        
+        const data = response.data;
+        setSubmissionId(data.submission_id);
+        setTestCard(data.test_card);
+        setTimeLeft(data.test_card.duration_minutes * 60);
+      } catch (err: any) {
+        let errorMessage = 'An unexpected error occurred.';
+        if (err.response) {
+          
+          // --- CHANGE START ---
+          // Specifically check for 403 Forbidden (Permission Denied)
+          if (err.response.status === 403) {
+            // Check for the 'message' key from our IsSubscribed permission
+            // or the 'error' key from other logic in start_test
+            errorMessage = err.response.data?.message || 
+                           err.response.data?.error || 
+                           "Choose Subscription plan to start this test.";
+          } 
+          // --- CHANGE END ---
 
+          // Existing check for unexpected HTML errors
+          else if (typeof err.response.data === 'string' && err.response.data.trim().startsWith('<!DOCTYPE')) {
+                errorMessage = 'The server returned an unexpected HTML response instead of JSON. This might be due to an authentication issue (please try logging in again) or a server error.';
+            } else {
+            // Existing fallback for other errors
+                errorMessage = err.response.data?.error || err.message || 'Failed to load test';
+            }
+        } else {
+            errorMessage = err.message || 'A network error occurred.';
+        }
+        setError(errorMessage);
+      } finally {
+        setLoading(false);
+      }
+    };
     handlestartTest();
   }, [params, testId]);
 

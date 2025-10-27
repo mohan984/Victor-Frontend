@@ -67,7 +67,7 @@ export default function LoginPage() {
 
   const handleGoogleLogin = () => {
     console.log("Google login clicked");
-    setError("Google login is not yet implemented.");
+    setError("Google login is not working at the moment.");
   };
 
   return (

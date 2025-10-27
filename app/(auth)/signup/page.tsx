@@ -85,7 +85,7 @@ export default function SignupPage() {
 
   const handleGoogleSignup = () => {
     console.log("Google signup clicked");
-    setError("Google signup is not yet implemented.");
+    setError("Google signup is not working at the moment.");
   };
 
   return (

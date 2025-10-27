@@ -45,7 +45,7 @@ export default function PopularExams() {
             Start Your Journey
           </h2>
           <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Popular Exams Available
+            Upcoming Exams
           </p>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
             Select an exam category to see available mock tests and practice papers.

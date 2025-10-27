@@ -7,33 +7,17 @@ import { CheckCircle2, Star, Building, Users } from 'lucide-react';
 // --- Updated Pricing Plan Data ---
 const pricingPlans = [
   {
-    name: 'Free',
-    price: 'Free',
-    billing_period: 'Forever',
-    description: 'Perfect for getting started and exploring our platform.',
-    features: [
-      { text: '5 Mock Tests / month', included: true },
-      { text: 'Basic Performance Stats', included: true },
-      { text: 'Access to Free Practice Questions', included: true },
-      { text: 'Limited Subject-wise Tests', included: true },
-      { text: 'Detailed Analytics & Insights', included: false },
-    ],
-    isPopular: false,
-    cta: 'Start for Free',
-    link: '/login',
-  },
-  {
     name: 'Pro',
-    price: '₹239',
-    billing_period: '/ 6 months',
-    description: '6 months of unlimited access and analysis to ace your exams.',
+    price: '₹299',
+    billing_period: '/ 12 months',
+    description: '12 months of unlimited access and analysis to ace your exams.',
     features: [
       { text: 'Unlimited Mock Tests', included: true },
       { text: 'Detailed Analytics & Insights', included: true },
       { text: 'Access All Subject-wise Tests', included: true },
       { text: 'Weekly Quiz competetion', included: true },
+      { text: 'Revision logs', included: true },
       { text: 'Priority Support', included: true },
-      { text: 'AI-Powered Doubt Solver', included: true },
     ],
     isPopular: true,
     cta: 'Choose Pro Plan',
@@ -60,7 +44,7 @@ const pricingPlans = [
 export default function PricingPage() {
   return (
     <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         {/* Header */}
         <div className="text-center">
           <span className="px-4 py-2 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full">
@@ -75,7 +59,7 @@ export default function PricingPage() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {pricingPlans.map((plan) => (
             <div
               key={plan.name}

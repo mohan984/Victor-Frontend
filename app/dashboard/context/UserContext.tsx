@@ -10,6 +10,8 @@ export interface UserProfile {
   completed_tests_today: number;
   average_score_today: number;
   current_streak: number;
+  has_active_subscription: boolean;
+  subscription_end_date: string | null;
 }
 
 const UserContext = createContext<UserProfile | null>(null);

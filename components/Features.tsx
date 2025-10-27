@@ -36,7 +36,7 @@ const features: Feature[] = [
       </svg>
     ),
     title: "Mock Exams",
-    description: "Practice with questions from previous years to understand the exam pattern."
+    description: "Practice with questions from  the Test to understand the exam pattern."
   },
   {
     icon: (
