@@ -328,7 +328,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {profileSidebarOpen && (
           <div 
-            className="fixed inset-0 bg-gradient-to-br from-gray-900/50 to-blue-900/50  z-10 lg:hidden transition-opacity duration-300" 
+            className="fixed inset-0 bg-gradient-to-br  to-blue-900/50  z-10 lg:hidden transition-opacity duration-300" 
             onClick={() => setProfileSidebarOpen(false)}
           ></div>
         )}
