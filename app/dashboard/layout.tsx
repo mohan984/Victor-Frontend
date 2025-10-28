@@ -174,7 +174,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   
                   <div className="text-center">
                     <div className="relative inline-block mb-4">
-                      <div className="w-24 h-24 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold text-3xl mx-auto shadow-2xl ring-4 ring-white/50">
+                      <div className="w-24 h-24 bg-white/30  rounded-full flex items-center justify-center text-white font-bold text-3xl mx-auto shadow-2xl ring-4 ring-white/50">
                         {user.username.substring(0, 2).toUpperCase()}
                       </div>
                       <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 border-4 border-white rounded-full flex items-center justify-center shadow-lg">
