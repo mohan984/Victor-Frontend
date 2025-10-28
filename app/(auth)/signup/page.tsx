@@ -61,7 +61,7 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await fetch("https://true-rice-fold.loca.lt", {
+      const res = await fetch("https://victor-main-core-backend.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

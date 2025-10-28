@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 1. Create a new Axios instance
 const api = axios.create({
-  baseURL: "  https://tall-beers-cough.loca.lt",
+  baseURL: "https://victor-main-core-backend.onrender.com", 
   headers: {
     'Content-Type': 'application/json',
 
