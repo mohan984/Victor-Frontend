@@ -61,7 +61,7 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await fetch("https://victor-main-core-backend.onrender.com", {
+      const res = await fetch("https://victor-main-core-backend.onrender.com/accounts/signup/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
