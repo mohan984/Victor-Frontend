@@ -144,6 +144,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               {children}
             </main>
 
+            {/* ⭐ CHANGED: Mobile Backdrop Overlay - Moved here (before sidebar) ⭐ */}
+            {profileSidebarOpen && (
+              <div 
+                className="fixed inset-0 bg-gradient-to-br from-gray-900/50 to-blue-900/50 backdrop-blur-sm z-10 lg:hidden transition-opacity duration-300" 
+                onClick={() => setProfileSidebarOpen(false)}
+              ></div>
+            )}
+
             {/* Enhanced Profile Sidebar */}
             <div className={`fixed right-0 top-16 bottom-0 w-80 bg-white/90 backdrop-blur-xl shadow-2xl border-l border-white/20 transform transition-transform duration-300 ease-in-out z-20 overflow-y-auto ${
               profileSidebarOpen ? 'translate-x-0' : 'translate-x-full'
@@ -326,12 +334,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
 
-        {profileSidebarOpen && (
-          <div 
-            className="fixed inset-0 bg-gradient-to-br from-gray-900/50 to-blue-900/50 backdrop-blur-sm z-10 lg:hidden transition-opacity duration-300" 
-            onClick={() => setProfileSidebarOpen(false)}
-          ></div>
-        )}
       </div>
 
       <style jsx>{`
