@@ -80,11 +80,41 @@ export default function PricingPage() {
         handler: async function (response: any) {
 
           console.log("Razorpay Response:", response);
-          toast.success("Payment Successful! Your subscription is now active.");
-          // Redirect to dashboard. The dashboard layout's useEffect
-          // will automatically refetch the user's profile.
-          setIsProcessing(false);
-          router.push("/dashboard");
+          try {
+            // Send the response object for signature verification and subscription activation
+            const verificationResponse = await api.post(
+              "api/subscriptions/verify_payment/", // 💡 MAKE SURE THIS BACKEND ENDPOINT EXISTS
+              {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+              }
+            );
+
+            // Assuming your backend verification is successful
+            if (verificationResponse.status === 200 || verificationResponse.status === 201) {
+              // 🟢 CHANGE: Replaced alert with toast
+              toast.success("Payment Successful! Your subscription is now active.");
+              
+              // Redirect AFTER successful server-side verification
+              // This is more stable on mobile since verification ensures the payment is legit
+              router.push("/dashboard");
+            } else {
+              // Handle unexpected verification status
+              toast.warn("Payment was successful, but verification failed. Contact support.");
+              router.push("/dashboard"); // Still redirect, but show a warning
+            }
+
+          } catch (serverError: any) {
+            console.error("Payment Verification Failed:", serverError);
+            // 🟢 CHANGE: Replaced alert with toast
+            toast.error("Payment successful, but verification failed on the server. Contact support.");
+            // You might want to redirect to a 'pending' or 'contact support' page here
+            router.push("/dashboard"); 
+          } finally {
+            // Important: Stop processing AFTER the entire success flow is done
+            setIsProcessing(false); 
+          }
         },
         prefill: {
           name: orderData.user_name,
@@ -99,6 +129,10 @@ export default function PricingPage() {
           setIsProcessing(false); // Stop processing if user closes modal before paying
         }
       },
+      // 🟢 NEW: Add callback_url for non-iFrame supported environments (e.g., some UPI apps)
+        // If the iFrame doesn't work, Razorpay redirects the user to this URL
+        // Make sure this URL is configured in your backend to handle payment details
+        callback_url: "https://victor-main-core-backend.onrender.com/api/subscriptions/payment_callback/", // ⚠️ **UPDATE THIS TO YOUR ACTUAL DOMAIN!**
       };
 
       const rzp = new (window as any).Razorpay(options);
@@ -106,13 +140,13 @@ export default function PricingPage() {
 
     } catch (err: any) {
       if (err.response?.data?.error) {
-        alert(`Error: ${err.response.data.error}`);
+        toast.error(`Error: ${err.response.data.error}`);
       } else {
-        alert("An unknown error occurred. Please try again.");
+        toast.error("An unknown error occurred. Please try again.");
       }
       console.error(err);
     } finally {
-      setIsProcessing(false);
+      
     }
   };
 
