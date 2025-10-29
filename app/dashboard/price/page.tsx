@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+// 🟢 NEW: Import toast for professional notifications
+import { toast } from "react-toastify";
 import api from "app/Lib/api"; // Make sure this path is correct
 
 // 1. Define the Plan interface to match your backend serializer
@@ -53,7 +55,7 @@ export default function PricingPage() {
     setIsProcessing(true);
     const scriptLoaded = await loadRazorpayScript();
     if (!scriptLoaded) {
-      alert("Failed to load payment gateway. Please check your connection.");
+      toast.error("Failed to load payment gateway. Please check your Internet connection.");
       setIsProcessing(false);
       return;
     }
@@ -78,7 +80,7 @@ export default function PricingPage() {
         handler: async function (response: any) {
 
           console.log("Razorpay Response:", response);
-          alert("Payment Successful! Your subscription is now active.");
+          toast.success("Payment Successful! Your subscription is now active.");
           // Redirect to dashboard. The dashboard layout's useEffect
           // will automatically refetch the user's profile.
           setIsProcessing(false);
